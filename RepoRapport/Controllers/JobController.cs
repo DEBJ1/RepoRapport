@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepoRapport.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace RepoRapport.Controllers
         // GET: Job
         public ActionResult Index()
         {
-            return View();
+            var model = new JobListItem[0];
+            return View(model);
         }
     }
 }

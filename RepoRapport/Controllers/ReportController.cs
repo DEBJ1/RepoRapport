@@ -14,7 +14,7 @@ namespace RepoRapport.Controllers
         public ActionResult Index()
         {
             var model = new ReportListItem[0];
-            return View();
+            return View(model);
         }
     }
 }

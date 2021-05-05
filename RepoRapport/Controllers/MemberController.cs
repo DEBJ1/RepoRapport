@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepoRapport.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace RepoRapport.Controllers
         // GET: Member
         public ActionResult Index()
         {
-            return View();
+            var model = new MemberListItem[0];
+            return View(model);
         }
     }
 }
