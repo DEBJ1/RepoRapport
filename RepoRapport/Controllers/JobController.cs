@@ -15,5 +15,11 @@ namespace RepoRapport.Controllers
             var model = new JobListItem[0];
             return View(model);
         }
+        //Add method here VVVV
+        //GET
+        public ActionResult Create()
+        {
+            return View();
+        }
     }
 }
