@@ -17,8 +17,14 @@ namespace RepoRapport.Controllers
         }
         //Add method here VVVV
         //GET
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create()
         {
+            if (ModelState.IsValid)
+            {
+
+            }
             return View();
         }
     }
