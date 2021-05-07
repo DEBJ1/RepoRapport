@@ -12,6 +12,9 @@ namespace RepoRapport.Controllers
         // GET: Job
         public ActionResult Index()
         {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new MemberService(userId);
+            var model = service.GetMembers();
             var model = new JobListItem[0];
             return View(model);
         }

@@ -34,6 +34,8 @@ namespace RepoRapport.Data
         }
 
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Job> Jobs { get; set; }
+        public DbSet<Member> Members { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
