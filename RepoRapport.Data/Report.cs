@@ -27,6 +27,7 @@ namespace RepoRapport.Data
 
         [ForeignKey(nameof(Job))] 
         public int? JobId { get; set; }
+       
         public virtual Job Job { get; set; }
     }
 }

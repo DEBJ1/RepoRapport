@@ -15,7 +15,7 @@ namespace RepoRapport.Models
         public Guid OwnerId { get; set; }
         public string Description { get; set; }
         public bool Completed { get; set; }
-      
-    
+        public int? MemberID { get; set; }
+
     }
 }

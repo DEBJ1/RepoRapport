@@ -26,8 +26,10 @@ namespace RepoRapport.Models
 
 
         public bool Completed { get; set; }
-
-     
        
+        public int? MemberID { get; set; }
+
+
+
     }
 }

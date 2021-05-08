@@ -16,5 +16,7 @@ namespace RepoRapport.Models
         public string Content { get; set; }
         public Guid OwnerId { get; set; }
         public DateTimeOffset Created { get; set; }
+        public int? JobId { get; set; }
+        public int? MemberId { get; set; }
     }
 }

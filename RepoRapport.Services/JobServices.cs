@@ -25,7 +25,8 @@ namespace RepoRapport.Services
                     OwnerId =_userId,
                     Title = model.Title,
                     Description = model.Description,
-                    StartDate = DateTimeOffset.Now
+                    StartDate = DateTimeOffset.Now,
+                    MemberID = model.MemberID
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -50,7 +51,8 @@ namespace RepoRapport.Services
 
                                     Title = e.Title,
 
-                                   Completed = e.Completed 
+                                   Completed = e.Completed,
+                                   MemberID = e.MemberID
                                 }
                         );
 
@@ -94,6 +96,7 @@ namespace RepoRapport.Services
                 entity.Description = model.Description;
                 entity.Title = model.Title;
                 entity.Completed = model.Completed;
+                entity.MemberID = model.MemberID;
 
 
 

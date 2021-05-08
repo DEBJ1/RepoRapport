@@ -17,14 +17,28 @@
         <dd>
             @Html.DisplayFor(model => model.ReportID)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.OwnerId)
+            @Html.DisplayNameFor(model => model.MemberId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OwnerId)
+            @Html.DisplayFor(model => model.MemberId)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobId)
+        </dd>
+
+        @*<dt>
+            @html.displaynamefor(model => model.ownerid)
+        </dt>*@
+
+        @*<dd>
+            @Html.DisplayFor(model => model.OwnerId)
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.Title)
@@ -50,7 +64,7 @@
             @Html.DisplayFor(model => model.Created)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.MemberId)
         </dt>
 
@@ -64,11 +78,11 @@
 
         <dd>
             @Html.DisplayFor(model => model.JobId)
-        </dd>
+        </dd>*@
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ReportID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

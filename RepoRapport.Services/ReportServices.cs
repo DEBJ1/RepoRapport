@@ -25,7 +25,10 @@ namespace RepoRapport.Services
                         OwnerId = _userId,
                         Title = model.Title,
                         Content = model.Content,
-                        Created = DateTimeOffset.Now
+                        Created = DateTimeOffset.Now,
+                        MemberId = model.MemberId,
+                        JobId = model.JobId
+                    
                     };
 
                 using (var ctx = new ApplicationDbContext())
@@ -50,7 +53,9 @@ namespace RepoRapport.Services
                                         
                                         Title = e.Title,
                                       
-                                        Created = DateTimeOffset.Now
+                                        Created = DateTimeOffset.Now,
+                                        MemberId = e.MemberId,
+                                        JobId = e.JobId
                                     }
                             );
 
@@ -74,7 +79,8 @@ namespace RepoRapport.Services
                 
                             Content = entity.Content,
                             Created = entity.Created,
-                            MemberId = entity.MemberId
+                            MemberId = entity.MemberId,
+                            JobId = entity.JobId
                             
                             
                         };
@@ -94,8 +100,11 @@ namespace RepoRapport.Services
                    
                     entity.Content = model.Content;
                     entity.Title = model.Title;
-          
-                
+                    entity.MemberId = model.MemberId;
+                    entity.JobId = model.JobId;
+
+
+
 
                     return ctx.SaveChanges() == 1;
                 }
