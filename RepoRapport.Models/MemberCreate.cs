@@ -11,6 +11,9 @@ namespace RepoRapport.Models
     {
         [Required]
         public string Title { get; set; }
+        public Guid OwnerId { get; set; }
+        [Key]
+        public int MemberID { get; set; }
         public string Name { get; set; }
         public string Skillset { get; set; }
     }

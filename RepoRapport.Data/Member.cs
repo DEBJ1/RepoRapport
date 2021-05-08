@@ -10,7 +10,7 @@ namespace RepoRapport.Data
     public class Member
     {
         [Key]
-        public int? MemberID { get; set; }
+        public int MemberID { get; set; }
         [Required]
         public Guid OwnerId { get; set; }
         [Required]

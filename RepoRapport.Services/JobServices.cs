@@ -21,13 +21,11 @@ namespace RepoRapport.Services
             var entity =
                 new Job()
                 {
-                    JobID = JobID,
-                    OwnerId = _userId,
+                    JobID = model.JobID,
+                    OwnerId =_userId,
                     Title = model.Title,
                     Description = model.Description,
-                    Completed = model.Completed,
-                    EndDate = DateTimeOffset.Now
-
+                    StartDate = DateTimeOffset.Now
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -35,23 +33,86 @@ namespace RepoRapport.Services
                 ctx.Jobs.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
-            IEnumerable<JobListItem> GetAllJobs()
+        }
+        public IEnumerable<JobListItem> GetJobs()
+        {
+            using (var ctx = new ApplicationDbContext())
             {
-                using (var ctx = new ApplicationDbContext())
-                {
-                    var query =
-                        ctx
+                var query =
+                    ctx
                         .Jobs
                         .Where(e => e.OwnerId == _userId)
                         .Select(
                             e =>
-                            new JobListItem
-                            {
-                                JobID = e.JobID,
-                                Title = e.Title
-                            }
-                            );
-                    return query.ToArray();
-                }
+                                new JobListItem
+                                {
+                                    JobID = e.JobID,
+
+                                    Title = e.Title,
+
+                                   Completed = e.Completed 
+                                }
+                        );
+
+                return query.ToArray();
+            }
+        }
+        public JobDetail GetJobById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Jobs
+                        .Single(e => e.JobID == id && e.OwnerId == _userId);
+                return
+                    new JobDetail
+                    {
+                        JobID = entity.JobID,
+                        OwnerId = _userId,
+                        Title = entity.Title,
+                        Description = entity.Description,
+                        StartDate = entity.StartDate,
+                        Completed = entity.Completed,
+                        MemberID = entity.MemberID
+
+                    };
+            }
+        }
+
+        public bool UpdateJob(JobEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Jobs
+                        .Single(e => e.JobID == model.JobID && e.OwnerId == _userId);
+
+
+
+                entity.Description = model.Description;
+                entity.Title = model.Title;
+                entity.Completed = model.Completed;
+
+
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+        public bool DeleteJob(int jobID)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Jobs
+                        .Single(e => e.JobID == jobID && e.OwnerId == _userId);
+
+                ctx.Jobs.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }

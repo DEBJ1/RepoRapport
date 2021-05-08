@@ -10,52 +10,109 @@ namespace RepoRapport.Services
 {
     public class ReportServices
     {
-        ApplicationDbContext _context = new ApplicationDbContext();
+            private readonly Guid _userId;
 
-        private readonly Guid _userId;
-
-        public ReportServices(Guid userId)
-        {
-            _userId = userId;
-        }
-        public bool CreateReport(ReportCreate model)
-        {
-            var entity =
-                new Report()
-                {
-                    ReportID = model.ReportID,
-                    OwnerId = _userId,
-                    Title = model.Title,
-                    Content = model.Content,
-                    Created = DateTimeOffset.Now,
-
-                };
-
-            using (var ctx = new ApplicationDbContext())
+            public ReportServices(Guid userId)
             {
-                ctx.Reports.Add(entity);
-                return ctx.SaveChanges() == 1;
+                _userId = userId;
             }
-             IEnumerable<ReportListItem> GetAllReports()
+            public bool CreateReport(ReportCreate model)
+            {
+                var entity =
+                    new Report()
+                    {
+                        ReportID = model.ReportID,
+                        OwnerId = _userId,
+                        Title = model.Title,
+                        Content = model.Content,
+                        Created = DateTimeOffset.Now
+                    };
+
+                using (var ctx = new ApplicationDbContext())
+                {
+                    ctx.Reports.Add(entity);
+                    return ctx.SaveChanges() == 1;
+                }
+            }
+            public IEnumerable<ReportListItem> GetReports()
             {
                 using (var ctx = new ApplicationDbContext())
                 {
                     var query =
                         ctx
-                        .Reports
-                        .Where(e =>e.OwnerId == _userId)
-                        .Select(
-                            e =>
-                            new ReportListItem
-                            {
-                                ReportID = e.ReportID,
-                                Title = e.Title
-                            }
+                            .Reports
+                            .Where(e => e.OwnerId == _userId)
+                            .Select(
+                                e =>
+                                    new ReportListItem
+                                    {
+                                        ReportID = e.ReportID,
+                                        
+                                        Title = e.Title,
+                                      
+                                        Created = DateTimeOffset.Now
+                                    }
                             );
+
                     return query.ToArray();
-              
+                }
+            }
+            public ReportDetail GetReportById(int id)
+            {
+                using (var ctx = new ApplicationDbContext())
+                {
+                    var entity =
+                        ctx
+                            .Reports
+                            .Single(e => e.ReportID == id && e.OwnerId == _userId);
+                    return
+                        new ReportDetail
+                        {
+                            ReportID = entity.ReportID,
+                            OwnerId = _userId,
+                            Title = entity.Title,
+                
+                            Content = entity.Content,
+                            Created = entity.Created,
+                            MemberId = entity.MemberId
+                            
+                            
+                        };
+                }
+            }
+
+            public bool UpdateReport(ReportEdit model)
+            {
+                using (var ctx = new ApplicationDbContext())
+                {
+                    var entity =
+                        ctx
+                            .Reports
+                            .Single(e => e.ReportID == model.ReportID && e.OwnerId == _userId);
+                    
+                    
+                   
+                    entity.Content = model.Content;
+                    entity.Title = model.Title;
+          
+                
+
+                    return ctx.SaveChanges() == 1;
+                }
+            }
+            public bool DeleteReport(int reportID)
+            {
+                using (var ctx = new ApplicationDbContext())
+                {
+                    var entity =
+                        ctx
+                            .Reports
+                            .Single(e => e.ReportID == reportID && e.OwnerId == _userId);
+
+                    ctx.Reports.Remove(entity);
+
+                    return ctx.SaveChanges() == 1;
                 }
             }
         }
     }
-}

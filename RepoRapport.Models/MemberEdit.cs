@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace RepoRapport.Models
 {
-    public class JobCreate
+    public class MemberEdit
     {
-        [Required]
+        [Key]
+        public int MemberID { get; set; }
+
         public string Title { get; set; }
-        public int JobID { get; set; }
-        public Guid OwnerId { get; set; }
-        public string Description { get; set; }
-        public bool Completed { get; set; }
-      
-    
+
+        public string Name { get; set; }
+
+        public string Skillset { get; set; }
     }
 }

@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 
 namespace RepoRapport.Models
 {
-    public class ReportCreate
+    public class MemberDetail
     {
-        [Required]
-        public string Title { get; set; }
         [Key]
-        public int ReportID { get; set; }
-        public string Content { get; set; }
+        public int MemberID { get; set; }
+      
         public Guid OwnerId { get; set; }
-        public DateTimeOffset Created { get; set; }
+      
+        public string Title { get; set; }
+       
+        public string Name { get; set; }
+      
+        public string Skillset { get; set; }
     }
 }

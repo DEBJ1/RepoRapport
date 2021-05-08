@@ -11,7 +11,7 @@ namespace RepoRapport.Data
     public class Job
     {
         [Key]
-        public int? JobID { get; set; }
+        public int JobID { get; set; }
         [Required]
         public Guid OwnerId { get; set; }
 
@@ -22,10 +22,10 @@ namespace RepoRapport.Data
         public string Description { get; set; }
 
         [Required]
-        public DateTime StartDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
         [Required]
-        public DateTime EndDate { get; set; }
+        public DateTimeOffset EndDate { get; set; }
 
         [Required]
         public bool Completed { get; set; }

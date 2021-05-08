@@ -9,8 +9,7 @@ namespace RepoRapport.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "RepoRapport.Data.ApplicationDbContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(RepoRapport.Data.ApplicationDbContext context)
